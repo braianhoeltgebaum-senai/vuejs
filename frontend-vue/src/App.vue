@@ -38,6 +38,7 @@ onMounted(() => {
 
 <template>
   <div class="page">
+    <div id="app">
     <div class="header">
       <span class="header-icon"></span>
       <div>
@@ -119,15 +120,22 @@ onMounted(() => {
         </div>
         <p v-if="tarefas.filter(t => t.status === 'CONCLUIDA').length === 0" class="vazia">Nenhuma tarefa</p>
       </div>
-
+      </div>
     </div>
   </div>
 </template>
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #0f1117;
   color: #e2e8f0;
@@ -137,12 +145,12 @@ body {
 
 .page {
   padding: 2rem;
+  padding-top: 3rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 5rem;
+  justify-content: flex-start; /* começa do topo, sem tentar centralizar verticalmente */
 }
 
 .header {
