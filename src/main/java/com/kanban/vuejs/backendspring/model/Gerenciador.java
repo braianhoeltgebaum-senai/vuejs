@@ -1,5 +1,6 @@
 package com.kanban.vuejs.backendspring.model;
 
+import com.kanban.vuejs.backendspring.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,5 +17,6 @@ public class Gerenciador {
 
     private String text;
 
-    private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

@@ -34,7 +34,7 @@ public class GerenciadorService {
                 .orElseThrow();
 
         gerenciador.setText(gerenciadorAtualizada.getText());
-        gerenciador.setCompleted(gerenciadorAtualizada.isCompleted());
+        gerenciador.setStatus(gerenciadorAtualizada.getStatus());
 
         return repository.save(gerenciador);
     }
