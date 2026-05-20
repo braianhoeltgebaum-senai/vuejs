@@ -36,6 +36,7 @@ public class GerenciadorController {
     public Gerenciador criar(@RequestBody Gerenciador gerenciador) {
 
         gerenciador.setStatus(Status.PENDENTE);
+        gerenciador.setCompleted(false);
 
         return service.salvar(gerenciador);
     }
