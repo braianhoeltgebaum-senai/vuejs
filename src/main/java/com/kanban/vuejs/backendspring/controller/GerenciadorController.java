@@ -1,7 +1,7 @@
 package com.kanban.vuejs.backendspring.controller;
 
 import java.util.List;
-import com.kanban.vuejs.backendspring.model.Gerenciador;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kanban.vuejs.backendspring.enums.Status;
+import com.kanban.vuejs.backendspring.model.Gerenciador;
 import com.kanban.vuejs.backendspring.service.GerenciadorService;
-
 
 @RestController
 @RequestMapping("/tarefas")
@@ -33,6 +34,9 @@ public class GerenciadorController {
 
     @PostMapping
     public Gerenciador criar(@RequestBody Gerenciador gerenciador) {
+
+        gerenciador.setStatus(Status.PENDENTE);
+
         return service.salvar(gerenciador);
     }
 
