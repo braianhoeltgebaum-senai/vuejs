@@ -17,6 +17,8 @@ public class Gerenciador {
 
     private String text;
 
+    private Boolean completed;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 }

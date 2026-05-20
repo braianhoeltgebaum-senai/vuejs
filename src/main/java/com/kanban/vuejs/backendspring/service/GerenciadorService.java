@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kanban.vuejs.backendspring.enums.Status;
 import com.kanban.vuejs.backendspring.model.Gerenciador;
 import com.kanban.vuejs.backendspring.repository.GerenciadorRepository;
 
@@ -21,6 +22,15 @@ public class GerenciadorService {
     }
 
     public Gerenciador salvar(Gerenciador gerenciador) {
+
+        if (gerenciador.getStatus() == null) {
+            gerenciador.setStatus(Status.PENDENTE);
+        }
+    
+        if (gerenciador.getCompleted() == null) {
+            gerenciador.setCompleted(false);
+        }
+    
         return repository.save(gerenciador);
     }
 
@@ -32,10 +42,19 @@ public class GerenciadorService {
 
         Gerenciador gerenciador = repository.findById(id)
                 .orElseThrow();
-
-        gerenciador.setText(gerenciadorAtualizada.getText());
-        gerenciador.setStatus(gerenciadorAtualizada.getStatus());
-
+    
+        if (gerenciadorAtualizada.getText() != null) {
+            gerenciador.setText(gerenciadorAtualizada.getText());
+        }
+    
+        if (gerenciadorAtualizada.getStatus() != null) {
+            gerenciador.setStatus(gerenciadorAtualizada.getStatus());
+        }
+    
+        if (gerenciadorAtualizada.getCompleted() != null) {
+            gerenciador.setCompleted(gerenciadorAtualizada.getCompleted());
+        }
+    
         return repository.save(gerenciador);
     }
 }
