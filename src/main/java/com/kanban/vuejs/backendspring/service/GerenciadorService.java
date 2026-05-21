@@ -18,43 +18,43 @@ public class GerenciadorService {
     }
 
     public List<Gerenciador> listar() {
-        return repository.findAll();
+        List<Gerenciador> tarefas = repository.findAll();
+        System.out.println("Tarefas listadas: " + tarefas);
+        return tarefas;
     }
 
     public Gerenciador salvar(Gerenciador gerenciador) {
-
         if (gerenciador.getStatus() == null) {
             gerenciador.setStatus(Status.PENDENTE);
         }
-    
         if (gerenciador.getCompleted() == null) {
             gerenciador.setCompleted(false);
         }
-    
-        return repository.save(gerenciador);
+        Gerenciador salvo = repository.save(gerenciador);
+        System.out.println("Tarefa criada: " + salvo);
+        return salvo;
+    }
+
+    public Gerenciador atualizar(Long id, Gerenciador gerenciadorAtualizada) {
+        Gerenciador gerenciador = repository.findById(id).orElseThrow();
+
+        if (gerenciadorAtualizada.getText() != null) {
+            gerenciador.setText(gerenciadorAtualizada.getText());
+        }
+        if (gerenciadorAtualizada.getStatus() != null) {
+            gerenciador.setStatus(gerenciadorAtualizada.getStatus());
+        }
+        if (gerenciadorAtualizada.getCompleted() != null) {
+            gerenciador.setCompleted(gerenciadorAtualizada.getCompleted());
+        }
+
+        Gerenciador atualizado = repository.save(gerenciador);
+        System.out.println("Tarefa atualizada (id " + id + "): " + atualizado);
+        return atualizado;
     }
 
     public void deletar(Long id) {
         repository.deleteById(id);
-    }
-
-    public Gerenciador atualizar(Long id, Gerenciador gerenciadorAtualizada) {
-
-        Gerenciador gerenciador = repository.findById(id)
-                .orElseThrow();
-    
-        if (gerenciadorAtualizada.getText() != null) {
-            gerenciador.setText(gerenciadorAtualizada.getText());
-        }
-    
-        if (gerenciadorAtualizada.getStatus() != null) {
-            gerenciador.setStatus(gerenciadorAtualizada.getStatus());
-        }
-    
-        if (gerenciadorAtualizada.getCompleted() != null) {
-            gerenciador.setCompleted(gerenciadorAtualizada.getCompleted());
-        }
-    
-        return repository.save(gerenciador);
+        System.out.println("Tarefa deletada (id " + id + ")");
     }
 }
